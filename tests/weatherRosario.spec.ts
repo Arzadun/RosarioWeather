@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { Login } from './pageObjects/login';
+import { Home } from './pageObjects/Home';
+import { timeStamp } from 'console';
 
 
 test('has title', async ({ page }) => {
@@ -23,22 +25,31 @@ test('get started link', async ({ page, request }) => {
   let sunrise = responseBody.daily.sunrise[0].split("T")[1];
   let sunset = responseBody.daily.sunset[0].split("T")[1];
  
+  const message = `Good morning!\nIn Rosario city, today's forecast predicts a maximum temperature of ${maxTemperature} and a minimum of ${minTemperature}.\nSunrise is at ${sunrise}hs, and sunset will be at ${sunset}hs.\nEnjoy the day!`;
 
   const login = new Login(page);
+  const home = new Home(page);
 
   await page.goto('https://twitter.com/i/flow/login');
   //await page.waitForNavigation();
   
   await login.loginIntoAccount();
+  await home.createPost(message);
   
-  await page.pause();
+
+
+  //const pageText = await page.textContent('body');
+
+  //expect(pageText).toContain(message);
+  
+ await page.pause();
   
   
 
   
 
 
-  //TODO: add wheater code to parameter and add that info weather_code
+  //TODO: add wheater code to parameter and add that info weather_code, add assertions, add delete post functionality
   /*
 
 WMO Weather interpretation codes (WW)
