@@ -10,8 +10,6 @@ private readonly inputPassword;
 private readonly nextButton;
 
 
-
-
 constructor(page){
     super(page);
 
@@ -33,7 +31,6 @@ async openLoginModal(){
     this.clickElement(this.loginButton);
 } */
 
-//CAMBIAR XPATHS
 async loginIntoAccount(){
 
     this.clickElement(this.signInButton);
@@ -42,9 +39,6 @@ async loginIntoAccount(){
     this.fillInput(this.inputPassword, credentials.password);
     this.clickElement(this.loginButton);
 }
-
-
-
 
 }
 
