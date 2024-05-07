@@ -34,15 +34,17 @@ test('get started link', async ({ page, request }) => {
   //await page.waitForNavigation();
   
   await login.loginIntoAccount();
+  await login.validateUserIsLoggedIn();
   await home.createPost(message);
+  await home.validatePostIsCreated();
   await home.deletePost();
-  
+  await home.validatePostIsDeleted();
 
   //const pageText = await page.textContent('body');
 
   //expect(pageText).toContain(message);
   
-// await page.pause();
+ await page.pause();
   
   
 

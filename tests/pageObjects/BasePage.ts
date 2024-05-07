@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page, expect } from "@playwright/test";
 export class BasePage{
 
     private readonly page;
@@ -27,6 +27,12 @@ export class BasePage{
         return element;
     }
 
+    async validateElementIsVisible(locator) {
+        await this.page.waitForSelector(locator);
+        const element = await this.page.locator(locator);
+        const isVisible = await element.isVisible();
+        await expect(isVisible).toBeTruthy();
+    }
     
 
 }

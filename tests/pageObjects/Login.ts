@@ -1,5 +1,7 @@
 import { BasePage } from "./BasePage";
 import credentials from '../../credentials.json'
+import { expect } from "@playwright/test";
+
 
 export class Login extends BasePage{
 
@@ -8,6 +10,7 @@ private readonly signInButton;
 private readonly inputUsername;
 private readonly inputPassword;
 private readonly nextButton;
+private readonly sidePostButton;
 
 
 constructor(page){
@@ -19,6 +22,7 @@ constructor(page){
    this.inputPassword = ('//input[@type=\'password\']') 
    this.signInButton = ('//span[text()[contains(.,\'Sign in\')]]/ancestor::div[1]') 
     this.nextButton = ('//span[text()[contains(.,\'Next\')]]/ancestor::div[1]') 
+    this.sidePostButton = ("//a[@data-testid='SideNav_NewTweet_Button']");
     
 }
 /*
@@ -33,11 +37,15 @@ async openLoginModal(){
 
 async loginIntoAccount(){
 
-    this.clickElement(this.signInButton);
-    this.fillInput(this.inputUsername, credentials.username);
-    this.clickElement(this.nextButton);
-    this.fillInput(this.inputPassword, credentials.password);
-    this.clickElement(this.loginButton);
+    await this.clickElement(this.signInButton);
+    await this.fillInput(this.inputUsername, credentials.username);
+    await this.clickElement(this.nextButton);
+    await this.fillInput(this.inputPassword, credentials.password);
+    await this.clickElement(this.loginButton);
+}
+
+async validateUserIsLoggedIn(){
+    await this.validateElementIsVisible(this.sidePostButton);
 }
 
 }
