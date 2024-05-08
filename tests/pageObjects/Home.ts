@@ -2,13 +2,13 @@ import { BasePage } from "./BasePage";
 
 export class Home extends BasePage{
 
-    private readonly postButton;
-    private readonly inputPost;
-    private readonly confirmationToast
-    private readonly kebabMenu;
-    private readonly deleteButtonMenu;
-    private readonly deleteButtonConfirmation;
-    private readonly deletedToast;
+    private readonly postButton: string;
+    private readonly inputPost: string;
+    private readonly confirmationToast: string;
+    private readonly kebabMenu: string;
+    private readonly deleteButtonMenu: string;
+    private readonly deleteButtonConfirmation: string;
+    private readonly deletedToast: string;
     
     constructor(page){
          super(page);

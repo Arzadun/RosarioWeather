@@ -5,12 +5,12 @@ import { expect } from "@playwright/test";
 
 export class Login extends BasePage{
 
-private readonly loginButton;
-private readonly signInButton;
-private readonly inputUsername;
-private readonly inputPassword;
-private readonly nextButton;
-private readonly sidePostButton;
+    private readonly loginButton: string;
+    private readonly signInButton: string;
+    private readonly inputUsername: string;
+    private readonly inputPassword: string;
+    private readonly nextButton: string;
+    private readonly sidePostButton: string;
 
 
 constructor(page){

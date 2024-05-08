@@ -6,15 +6,15 @@ export class BasePage{
         this.page = page;
     }
 
-    async fillInput(locator,text){
+    async fillInput(locator: string,text: string){
         await this.page.fill(locator, text);
     }
    
-    async goto(url){
+    async goto(url: string){
         await this.page.goto(url);
     }
 
-    async clickElement(locator) {
+    async clickElement(locator: string) {
         await this.page.click(locator);
       }
     
@@ -27,7 +27,7 @@ export class BasePage{
         return element;
     }
 
-    async validateElementIsVisible(locator) {
+    async validateElementIsVisible(locator: string) {
         await this.page.waitForSelector(locator);
         const element = await this.page.locator(locator);
         const isVisible = await element.isVisible();
