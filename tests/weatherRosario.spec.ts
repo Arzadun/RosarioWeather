@@ -72,7 +72,6 @@ test('Create post', async ({ page }) => {
 
   await home.createPost(message);
   await home.validatePostIsCreated();
-  await page.pause();
  
 });
 
