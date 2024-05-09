@@ -1,5 +1,5 @@
 import { test, expect, Page } from '@playwright/test';
-import { Login } from './pageObjects/login';
+import { Login } from './pageObjects/Login';
 import { Home } from './pageObjects/Home';
 import { timeStamp } from 'console';
 
