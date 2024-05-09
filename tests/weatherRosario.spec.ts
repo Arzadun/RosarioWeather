@@ -1,11 +1,11 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, Page } from '@playwright/test';
 import { Login } from './pageObjects/login';
 import { Home } from './pageObjects/Home';
 import { timeStamp } from 'console';
 
 let message: string;
 
-test.beforeAll(async ({request }) => {
+test.beforeAll(async ({request, browser }) => {
   const response = await request.get("https://api.open-meteo.com/v1/forecast?latitude=-32.9468&longitude=-60.6393&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=auto&forecast_days=1")
 
   expect(response.status()).toBe(200);
@@ -17,29 +17,7 @@ test.beforeAll(async ({request }) => {
   let sunrise = responseBody.daily.sunrise[0].split("T")[1];
   let sunset = responseBody.daily.sunset[0].split("T")[1];
  
-  message = `Good morning!\nIn Rosario city, today's forecast predicts a maximum temperature of ${maxTemperature} and a minimum of ${minTemperature}.\nSunrise is at ${sunrise}hs, and sunset will be at ${sunset}hs.\nEnjoy the day!`;
-
-});
-
-test('get started link', async ({ page }) => {
-
-  const login = new Login(page);
-  const home = new Home(page);
-
-  await page.goto('https://twitter.com/i/flow/login');
-  //await page.waitForNavigation();
-  await login.loginIntoAccount();
-  await login.validateUserIsLoggedIn();
-  await home.createPost(message);
-  await home.validatePostIsCreated();
-  await home.deletePost();
-  await home.validatePostIsDeleted();
   
- //await page.pause();
-  
-
-
-
   //TODO: add wheater code to parameter and add that info weather_code, add assertions, add delete post functionality
   /*
 
@@ -60,12 +38,47 @@ Code	Description
 96, 99 *	Thunderstorm with slight and heavy hail
 (*) Thunderstorm forecast with hail is only available in Central Europe
   */
+  
+  message = `Good morning!\nIn Rosario city, today's forecast predicts a maximum temperature of ${maxTemperature} and a minimum of ${minTemperature}.\nSunrise is at ${sunrise}hs, and sunset will be at ${sunset}hs.\nEnjoy the day!`;
 
 });
 
-test.afterAll(async ({ page }) => {
+
+test.beforeEach(async ({ page}) => {
+  const login = new Login(page);
+
+  await page.goto('https://twitter.com/i/flow/login');
+  
+  await login.loginIntoAccount();
+  await login.validateUserIsLoggedIn();
+
+
+});
+
+test('create and delete post', async ({ page }) => {
+
 
   const home = new Home(page);
+  await page.pause();
   await home.createPost(message);
   await home.validatePostIsCreated();
+  await home.deletePost();
+  await home.validatePostIsDeleted();
+  
+ await page.pause();
+  
+
+
+
+
+});
+
+test('create post', async ({ page }) => {
+
+ 
+  const home = new Home(page);
+
+  await home.createPost(message);
+  await home.validatePostIsCreated();
+ 
 });
