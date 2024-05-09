@@ -12,6 +12,9 @@ export class Login extends BasePage{
     private readonly nextButton: string;
     private readonly sidePostButton: string;
 
+    private readonly username = process.env.USERNAME;
+    private readonly password = process.env.PASSWORD;
+
 
 constructor(page){
     super(page);
@@ -38,9 +41,9 @@ async openLoginModal(){
 async loginIntoAccount(){
 
     await this.clickElement(this.signInButton);
-    await this.fillInput(this.inputUsername, credentials.username);
+    await this.fillInput(this.inputUsername, this.username);
     await this.clickElement(this.nextButton);
-    await this.fillInput(this.inputPassword, credentials.password);
+    await this.fillInput(this.inputPassword, this.password);
     await this.clickElement(this.loginButton);
 }
 

@@ -6,7 +6,7 @@ export class BasePage{
         this.page = page;
     }
 
-    async fillInput(locator: string,text: string){
+    async fillInput(locator: string,text: any){
         await this.page.fill(locator, text);
     }
    
