@@ -55,30 +55,32 @@ test.beforeEach(async ({ page}) => {
 
 });
 
-test('create and delete post', async ({ page }) => {
-
+test('Create and delete post', async ({ page }) => {
 
   const home = new Home(page);
-  await page.pause();
   await home.createPost(message);
   await home.validatePostIsCreated();
   await home.deletePost();
   await home.validatePostIsDeleted();
   
- await page.pause();
-  
-
-
-
-
 });
 
-test('create post', async ({ page }) => {
+test('Create post', async ({ page }) => {
 
  
   const home = new Home(page);
 
   await home.createPost(message);
   await home.validatePostIsCreated();
+  await page.pause();
+ 
+});
+
+test('Logout', async ({ page }) => {
+
+ 
+  const home = new Home(page);
+  await home.logout();
+  await home.validateUserisLoggedOut();
  
 });

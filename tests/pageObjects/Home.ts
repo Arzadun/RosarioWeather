@@ -9,6 +9,11 @@ export class Home extends BasePage{
     private readonly deleteButtonMenu: string;
     private readonly deleteButtonConfirmation: string;
     private readonly deletedToast: string;
+    private readonly logoutAvatar: string;
+    private readonly logoutButton: string;
+    private readonly logoutConfirmation: string;
+    private readonly signInButton: string;
+    
     
     constructor(page){
          super(page);
@@ -19,6 +24,11 @@ export class Home extends BasePage{
          this.deleteButtonMenu = ('//span[text()[contains(.,\'Delete\')]]/ancestor::div[1]');
          this.deleteButtonConfirmation = ("//div[@data-testid='confirmationSheetConfirm']");
          this.deletedToast = ('//span[text()="Your post was deleted"]/ancestor::div[@role="alert"]');
+         this.logoutAvatar = ('//div[@data-testid=\'SideNav_AccountSwitcher_Button\']');
+         this.logoutButton = ('//a[@data-testid=\'AccountSwitcher_Logout_Button\']');
+         this.logoutConfirmation = ('//div[@data-testid=\'confirmationSheetConfirm\']');
+         this.signInButton = ('//span[text()[contains(.,\'Sign in\')]]/ancestor::div[1]') 
+         
     }
 //div[@data-testid="caret"]
     /*
@@ -41,6 +51,16 @@ export class Home extends BasePage{
 
     async validatePostIsDeleted(){
         await this.validateElementIsVisible(this.deletedToast);
+    }
+
+    async logout(){
+        await this.clickElement(this.logoutAvatar);
+        await this.clickElement(this.logoutButton);
+        await this.clickElement(this.logoutConfirmation);
+    }
+
+    async validateUserisLoggedOut (){
+        await this.validateElementIsVisible(this.signInButton);
     }
 
 }
