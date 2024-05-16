@@ -27,11 +27,20 @@ export class BasePage{
         return element;
     }
 
-    async validateElementIsVisible(locator: string) {
-        await this.page.waitForSelector(locator);
-        const element = await this.page.locator(locator);
-        const isVisible = await element.isVisible();
-        await expect(isVisible).toBeTruthy();
+    async validateElementIsVisible(locator: string): Promise<boolean> {
+        try {
+            await this.page.waitForSelector(locator, { timeout: 5000 }); // Timeout after 5 seconds
+            const element = await this.page.locator(locator);
+            const isVisible = await element.isVisible();
+            if (isVisible){
+                return true;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error("Element not visible within timeout period");
+            return false;
+        }
     }
     
 

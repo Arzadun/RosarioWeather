@@ -50,8 +50,14 @@ test.beforeEach(async ({ page}) => {
   await page.goto('https://twitter.com/i/flow/login');
   
   await login.loginIntoAccount();
-  await login.validateUserIsLoggedIn();
-
+  if (!(await login.securityCheckIsDisplayed())) {
+    console.log("i'm not in check")
+    await login.validateUserIsLoggedIn();
+ } else {
+  console.log("i'm in check")
+   await login.bypassCheck();
+   
+ }
 
 });
 
@@ -70,16 +76,54 @@ test('Create post', async ({ page }) => {
  
   const home = new Home(page);
 
+ 
   await home.createPost(message);
   await home.validatePostIsCreated();
- 
+
 });
 
 test('Logout', async ({ page }) => {
 
- 
+  
   const home = new Home(page);
   await home.logout();
   await home.validateUserisLoggedOut();
  
 });
+
+
+/* 
+COPIAR LOGICA ABAJO PARA INGRESAR MAIL SI APARECE EL SECURITY CHECK
+const { chromium } = require('playwright');
+
+(async () => {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  await page.goto('https://example.com');
+
+  const element = await page.$('your-selector'); // Replace 'your-selector' with your actual CSS selector
+
+  if (await element.isVisible()) {
+    // Do something if the element is visible
+    console.log('Element is visible');
+  } else {
+    // Do something else if the element is not visible
+    console.log('Element is not visible');
+  }
+
+  await browser.close();
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
