@@ -45,14 +45,16 @@ Code	Description
 
 
 test.beforeEach(async ({ page}) => {
+
   const login = new Login(page);
 
   await page.goto('https://twitter.com/i/flow/login');
-  
   await login.loginIntoAccount();
-  await login.validateUserIsLoggedIn();
-
-
+  if (!(await login.securityCheckIsDisplayed())) {
+    await login.validateUserIsLoggedIn();
+ } else {
+   await login.bypassCheck();
+ }
 });
 
 test('Create and delete post', async ({ page }) => {
@@ -67,19 +69,15 @@ test('Create and delete post', async ({ page }) => {
 
 test('Create post', async ({ page }) => {
 
- 
   const home = new Home(page);
-
   await home.createPost(message);
   await home.validatePostIsCreated();
- 
+
 });
 
 test('Logout', async ({ page }) => {
 
- 
   const home = new Home(page);
   await home.logout();
   await home.validateUserisLoggedOut();
- 
 });
