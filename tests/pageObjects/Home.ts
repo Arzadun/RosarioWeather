@@ -44,7 +44,6 @@ export class Home extends BasePage{
     }
 
     async deletePost(){
-    
         await this.clickElement(this.kebabMenu);
         await this.clickElement(this.deleteButtonMenu);
         await this.clickElement(this.deleteButtonConfirmation);

@@ -17,8 +17,6 @@ export class Login extends BasePage{
 
 constructor(page){
     super(page);
-
-    
     this.loginButton = ('//span[text()[contains(.,\'Log in\')]]/ancestor::div[1]');
    this.inputUsername = ('//input[@class="r-30o5oe r-1dz5y72 r-13qz1uu r-1niwhzg r-17gur6a r-1yadl64 r-deolkf r-homxoj r-poiln3 r-7cikom r-1ny4l3l r-t60dpp r-fdjqy7"]') //"#login-username"
    this.inputPassword = ('//input[@type=\'password\']') 
@@ -53,19 +51,14 @@ async validateUserIsLoggedIn(){
 }
 
 async bypassCheck (){
-    console.log(this.email)
-    console.log(this.inputCheck)
     await this.fillInput(this.inputCheck, this.email);
     await this.clickElement(this.nextButton);
 }
 
 async securityCheckIsDisplayed(): Promise<boolean>{
-    console.log()
     if(await this.validateElementIsVisible(this.inputCheck)){
-        console.log("it's true")
         return true;
     }
-    console.log("it's false")
     return false;
 }
 

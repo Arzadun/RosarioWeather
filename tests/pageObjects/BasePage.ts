@@ -29,7 +29,7 @@ export class BasePage{
 
     async validateElementIsVisible(locator: string): Promise<boolean> {
         try {
-            await this.page.waitForSelector(locator, { timeout: 5000 }); // Timeout after 5 seconds
+            await this.page.waitForSelector(locator, { timeout: 5000 }); 
             const element = await this.page.locator(locator);
             const isVisible = await element.isVisible();
             if (isVisible){
