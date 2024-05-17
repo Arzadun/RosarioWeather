@@ -41,6 +41,8 @@ async openLoginModal(){
 } */
 
 async loginIntoAccount(){
+    console.log(this.username)
+    console.log(this.password)
     await this.clickElement(this.signInButton);
     await this.fillInput(this.inputUsername, this.username);
     await this.clickElement(this.nextButton);
