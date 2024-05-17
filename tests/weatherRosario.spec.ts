@@ -52,9 +52,9 @@ test.beforeEach(async ({ page}) => {
   await login.loginIntoAccount();
   if (!(await login.securityCheckIsDisplayed())) {
     await login.validateUserIsLoggedIn();
- } else {
-   await login.bypassCheck();
- }
+} else {
+    await login.bypassCheck();
+}
 });
 
 test('Create and delete post', async ({ page }) => {
