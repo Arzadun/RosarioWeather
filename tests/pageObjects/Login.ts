@@ -28,7 +28,7 @@ constructor(page){
     this.nextButton = ('//span[text()[contains(.,\'Next\')]]/ancestor::div[1]') 
     this.sidePostButton = ("//a[@data-testid='SideNav_NewTweet_Button']");
     this.inputCheckEmail =('//input[@type=\'email\']')
-    this.email = "weatherrosario@mailinator.com";
+    this.email = "normalemail@mailinator.com";
     this.inputCheckCode =("//input[@data-testid='ocfEnterTextTextInput']")
     
 }
