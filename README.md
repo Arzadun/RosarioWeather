@@ -24,3 +24,7 @@ RosarioWeather is a TypeScript-based Playwright project designed to fetch and up
 To run the Playwright script:
 ```bash
 npx playwright test
+```
+
+## Demo
+[![YouTube](http://i.ytimg.com/vi/cYWMu9Llvqs/hqdefault.jpg)](https://www.youtube.com/watch?v=cYWMu9Llvqs)
